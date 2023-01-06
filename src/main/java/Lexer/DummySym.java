@@ -24,6 +24,7 @@ public class DummySym {
     //separators
     public final static int DOTCOMMA = 17;
     public final static int COMMA = 18;
+    public final static int ASSIGN = 29;
 
     //key_words
     public final static int MAIN = 19;

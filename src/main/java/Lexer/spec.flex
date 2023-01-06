@@ -1,5 +1,5 @@
 // import section
-import java_cup.runtime.*;
+import Parser.sym;import java_cup.runtime.*;
 %%
 // declaration section
 %class MPLexer
@@ -52,6 +52,7 @@ oc16 = [0-9A-F]
 //separators
 ; { return new Symbol( sym.DOTCOMMA); }
 , { return new Symbol( sym.COMMA ); }
+= { return new Symbol( sym.ASSIGN ); }
 
 //key_words
 int {return new Symbol(sym.INT);}

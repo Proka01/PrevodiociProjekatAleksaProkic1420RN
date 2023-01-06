@@ -20,7 +20,6 @@ Statement -> WHILE ( Expression ) StatementListInBrackets
 		   | ID = Expression ;
 		   | printf ( NameList ) ;
 		   | scanf ( ExpressionList ) ;
-		   | Block
 
 StatementListInBrackets -> { StatementList }
 
