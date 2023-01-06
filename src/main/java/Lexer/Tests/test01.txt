@@ -1,0 +1,14 @@
+int main()
+{
+    int a;
+    int b;
+    int c;
+
+    while(a < b)
+    {
+        if(c > 5)
+        {
+            printf(c);
+        }
+    }
+}

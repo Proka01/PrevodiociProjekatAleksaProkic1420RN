@@ -1,0 +1,52 @@
+Program -> INT MAIN() Block
+
+Block -> {VarList StatementList}
+
+VarList -> VarList VarDecl | VarDecl
+
+VarDecl -> Type NameList ;
+
+NameList -> NameList, ID | ID
+
+Type -> INT | DOUBLE
+
+
+
+StatementList -> StatementList Statement | Statement
+
+Statement -> WHILE ( Expression ) StatementListInBrackets
+           | IF (Expression) StatementListInBrackets
+		   | IF ( Expression ) StatementListInBrackets ELSE StatementListInBrackets
+		   | ID = Expression ;
+		   | printf ( NameList ) ;
+		   | scanf ( ExpressionList ) ;
+		   | Block
+
+StatementListInBrackets -> { StatementList }
+
+
+
+
+Expression -> Expression || AndExpression
+		   |  AndExpression
+
+AndExpression -> AndExpression && RelExpression
+		      |	 RelExpression
+
+RelExpression -> ArExpression RelOp ArExpression
+			  |  ArExpression
+
+RelOp -> < | <= | == | != | > | >=
+
+ArExpression -> ArExpression + Term
+		     |	ArExpression - Term
+			 |  Term
+
+Term -> Term * Factor
+	  | Term / Factor
+	  | Factor
+
+Factor -> ID | CONST | ( Expression )
+
+ExpressionList -> ExpressionList, Expression
+				| Expression

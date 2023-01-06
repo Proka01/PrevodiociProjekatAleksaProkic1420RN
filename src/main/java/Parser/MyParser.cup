@@ -1,0 +1,244 @@
+//import section
+
+import java_cup.runtime.*;
+import java.io.*;
+
+parser code
+{:
+
+   public static void main(String[] args)
+   {
+      try
+	  {
+		   FileReader file = new FileReader( args[0] );
+		   Scanner scanner = new MPLexer( file );
+		   MPParser mpParser = new MPParser( scanner );
+		   mpParser.parse();
+	  }
+	  catch( Exception e )
+	  {
+		   System.out.println(e.getMessage());
+	  }
+   }
+:};
+
+//terminal_symbols
+terminal LP, RP, LV, RV;
+terminal AND, OR, PLUS, MUL, MIN, DIV, LESS, LESSE, GREAT, GREATE, EQ, NEQ;
+terminal DOTCOMMA, COMMA;
+terminal MAIN, INT, DOUBLE, IF, ELSE, WHILE, PRINTF, SCANF;
+terminal ID, CONST;
+
+//nonterminal_symboles
+non terminal Program, Block, VarList, StatementList, VarDecl, Type, NameList;
+non terminal Statement, Expression, StatementListInBrackets, ExpressionList;
+non terminal AndExpression, RelExpression, ArExpression, RelOp, Term, Factor;
+
+
+//Grammar
+Program ::= INT MAIN LP RP Block
+            {:
+                System.out.println("Redukcija po smeni 1");
+            :};
+
+Block ::= LV VarList StatementList RV
+            {:
+                System.out.println("Redukcija po smeni 2");
+            :};
+
+VarList ::= VarList VarDecl
+            {:
+                System.out.println("Redukcija po smeni 3");
+            :}
+            | VarDecl
+            {:
+                System.out.println("Redukcija po smeni 4");
+            :};
+
+VarDecl ::= Type NameList DOTCOMMA
+            {:
+                System.out.println("Redukcija po smeni 5");
+            :};
+
+NameList ::= NameList COMMA ID
+            {:
+                System.out.println("Redukcija po smeni 6");
+            :}
+            | ID
+            {:
+                System.out.println("Redukcija po smeni 7");
+            :};
+
+Type ::= INT
+        {:
+            System.out.println("Redukcija po smeni 8");
+        :}
+        | DOUBLE
+        {:
+            System.out.println("Redukcija po smeni 9");
+        :};
+
+
+
+
+StatementList ::= StatementList Statement
+            {:
+                System.out.println("Redukcija po smeni 10");
+            :}
+            | Statement
+            {:
+                System.out.println("Redukcija po smeni 11");
+            :};
+
+Statement ::= WHILE LP Expression RP StatementListInBrackets
+            {:
+                System.out.println("Redukcija po smeni 12");
+            :}
+            | IF LP Expression RP StatementListInBrackets
+            {:
+                System.out.println("Redukcija po smeni 13");
+            :}
+            | IF LP Expression RP StatementListInBrackets ELSE StatementListInBrackets
+            {:
+                System.out.println("Redukcija po smeni 14");
+            :}
+            | ID EQ Expression DOTCOMMA
+            {:
+                System.out.println("Redukcija po smeni 15");
+            :}
+            | PRINTF LP NameList RP DOTCOMMA
+            {:
+                System.out.println("Redukcija po smeni 16");
+            :}
+            | SCANF LP ExpressionList RP DOTCOMMA
+            {:
+                System.out.println("Redukcija po smeni 17");
+            :}
+            | Block
+            {:
+                System.out.println("Redukcija po smeni 18");
+            :};
+
+StatementListInBrackets ::= LV StatementList RV
+            {:
+                System.out.println("Redukcija po smeni 19");
+            :};
+
+
+
+
+Expression ::= Expression OR AndExpression
+            {:
+                System.out.println("Redukcija po smeni 20");
+            :}
+            | AndExpression
+            {:
+                System.out.println("Redukcija po smeni 21");
+            :};
+
+AndExpression ::= AndExpression AND RelExpression
+            {:
+                System.out.println("Redukcija po smeni 22");
+            :}
+            | RelExpression
+            {:
+                System.out.println("Redukcija po smeni 23");
+            :};
+
+RelExpression ::= ArExpression RelOp ArExpression
+            {:
+                System.out.println("Redukcija po smeni 24");
+            :}
+            | ArExpression
+            {:
+                System.out.println("Redukcija po smeni 25");
+            :};
+
+RelOp ::= LESS
+            {:
+                System.out.println("Redukcija po smeni 26");
+            :}
+            | LESSE
+            {:
+                System.out.println("Redukcija po smeni 27");
+            :}
+            | EQ
+            {:
+                System.out.println("Redukcija po smeni 28");
+            :}
+            | NEQ
+            {:
+                System.out.println("Redukcija po smeni 29");
+            :}
+            | GREAT
+            {:
+                System.out.println("Redukcija po smeni 30");
+            :}
+            | GREATE
+            {:
+                System.out.println("Redukcija po smeni 31");
+            :};
+
+ArExpression ::= ArExpression PLUS Term
+            {:
+                System.out.println("Redukcija po smeni 32");
+            :}
+            | ArExpression MIN Term
+            {:
+                System.out.println("Redukcija po smeni 33");
+            :}
+            | Term
+            {:
+                System.out.println("Redukcija po smeni 34");
+            :};
+
+Term ::= Term MUL Factor
+            {:
+                System.out.println("Redukcija po smeni 35");
+            :}
+            | Term DIV Factor
+            {:
+                System.out.println("Redukcija po smeni 36");
+            :}
+            | Factor
+            {:
+                System.out.println("Redukcija po smeni 37");
+            :};
+
+Factor ::= ID
+            {:
+                System.out.println("Redukcija po smeni 38");
+            :}
+            | CONST
+            {:
+                System.out.println("Redukcija po smeni 39");
+            :}
+            | LP Expression RP
+            {:
+                System.out.println("Redukcija po smeni 40");
+            :};
+
+ExpressionList ::= ExpressionList COMMA Expression
+            {:
+                System.out.println("Redukcija po smeni 41");
+            :}
+            | Expression
+            {:
+                System.out.println("Redukcija po smeni 42");
+            :};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
