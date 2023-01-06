@@ -1,0 +1,24 @@
+int main()
+{
+    int a1,b2,c3,d4;
+     _val;
+
+    _val = 0;
+    a1 = 100;
+    b2 = 200;
+    c3 = 300;
+    d4 = 400;
+
+    while(a1 < b2 && c3 < d4)
+    {
+        while(_val < 500)
+        {
+            if(_val == 250)
+            {
+                printf(a1,b2,c3,d4);
+                printf(_val);
+            }
+        }
+    }
+
+}
